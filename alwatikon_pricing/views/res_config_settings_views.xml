@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_alwatikon_pricing" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.alwatikon.pricing</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app string="Alwatikon Pricing"
+                     data-string="Alwatikon Pricing"
+                     name="alwatikon_pricing">
+
+                    <block title="General Ledger Accounts"
+                           name="alwatikon_pricing_gl_accounts">
+                        <setting string="FX Gain Account"
+                                 help="GL account used for foreign-exchange gains."
+                                 id="alwatikon_pricing_fx_gain_account_setting">
+                            <field name="currency_gain_account_id"/>
+                        </setting>
+                        <setting string="FX Loss Account"
+                                 help="GL account used for foreign-exchange losses."
+                                 id="alwatikon_pricing_fx_loss_account_setting">
+                            <field name="currency_loss_account_id"/>
+                        </setting>
+                    </block>
+
+                    <block title="Foreign Exchange"
+                           name="alwatikon_pricing_fx">
+                        <setting string="FX Journal"
+                                 help="Journal used for foreign-exchange revaluation entries."
+                                 id="alwatikon_pricing_fx_journal_setting">
+                            <field name="fx_journal_id"/>
+                        </setting>
+                    </block>
+
+                    <block title="Landed Costs"
+                           name="alwatikon_pricing_landed">
+                        <setting string="Forecast Landed %"
+                                 help="Default forecast landed-cost percentage for pricing."
+                                 id="alwatikon_pricing_forecast_landed_pct_setting">
+                            <field name="forecast_landed_pct"/>
+                        </setting>
+                    </block>
+
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

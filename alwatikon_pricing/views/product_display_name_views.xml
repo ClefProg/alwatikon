@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_display_name_tree" model="ir.ui.view">
+        <field name="name">product.display.name.tree</field>
+        <field name="model">product.display.name</field>
+        <field name="arch" type="xml">
+            <list string="Display Names">
+                <field name="name"/>
+                <field name="variant_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_product_display_name_form" model="ir.ui.view">
+        <field name="name">product.display.name.form</field>
+        <field name="model">product.display.name</field>
+        <field name="arch" type="xml">
+            <form string="Display Name">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_unassigned_variants"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-link"
+                                invisible="unassigned_variant_count == 0"
+                                string="Unassigned Variants">
+                            <field name="unassigned_variant_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="variant_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_product_display_name" model="ir.actions.act_window">
+        <field name="name">Display Names</field>
+        <field name="res_model">product.display.name</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_product_display_name"
+              name="Display Names"
+              parent="sale.product_menu_catalog"
+              action="action_product_display_name"
+              sequence="31"/>
+</odoo>

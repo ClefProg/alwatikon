@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="sh_pos_multi_pricelist.PaymentScreenDue" t-inherit="point_of_sale.PaymentScreenDue" t-inherit-mode="extension">
+        <xpath expr="//section[hasclass('paymentlines-container')]" position="inside">
+            <t t-if="pos.config.sh_enable_payment_in_pricelist">
+                <div class="sh_payment_pricelist_div" style="justify-content: center;">
+                    <span class="rounding_label">
+                        <b>Payment In Pricelist Currency:</b>
+                    </span>
+                    <input class="tgl tgl-flat" id="cb4" name="cb4" type="checkbox" t-att-checked="state.is_payment_pricelist" t-on-click="() => this.changeCheckbox()"/>
+                    <label class="tgl-btn cb4_label" for="cb4"></label>
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>

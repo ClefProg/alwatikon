@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="sh_pos_multi_pricelist.PaymentScreenButtons" t-inherit="point_of_sale.PaymentScreenButtons" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('payment-buttons')]" position="after">
+            <div class="sh_update_rate_btn_div" t-if="pos.config.sh_allow_to_change_currency_rate and pos.config.pricelist_id != pos.getOrder().pricelist_id">
+                <button class="sh_update_rate_btn sh_update_rate_btn rounded-0 btn btn-light w-100 text-start py-3" t-on-click="() => this.updateRate()" >
+                    Update Rate
+                </button>
+            </div>
+        </xpath>
+    </t>
+</templates>

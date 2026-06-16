@@ -1,0 +1,58 @@
+.sh_update_rate_btn_div{
+    margin-top: 8px;
+    .sh_update_rate_btn{
+        font-weight: 600;
+        text-align: center !important;
+        border-radius: 0.25rem !important;
+    }
+}
+.sh_payment_pricelist_div{
+    padding-bottom: 15px;display: flex;align-items: center;justify-content: left; 
+    .rounding_label{
+        padding-right: 5px;padding-left: 15px;
+    }
+}
+
+
+.pos .payment-screen .paymentlines-container .sh_payment_pricelist_div{padding-top: 7px; padding-left: 5px; padding-bottom: 7px; display: flex; align-items: center;}
+.pos .payment-screen .paymentlines-container .tgl {
+	display: none;
+	// add default box-sizing for this scope
+	&,
+  &:after,
+  &:before,
+	& *,
+  & *:after,
+  & *:before,
+	& + .tgl-btn {
+		box-sizing: border-box;
+		&::selection {
+			background: none;
+		}
+	}
+	+ .tgl-btn {outline: 0;display: block;width: 3.5em;height: 1.6em;position: relative;cursor: pointer;
+    	user-select: none;
+		&:after,
+    &:before {position: relative;display: block;content: "";width: 50%;height: 100%;
+		}
+		&:after {left: 0;}
+    	&:before {display: none;}
+	}
+	&:checked + .tgl-btn:after {left: 50%;}
+}
+.tgl-flat {
+	+ .tgl-btn {padding: 2px;transition: all .2s ease;background: #fff;border: 3px solid #e1e1e1;border-radius: 2em;
+		&:after {transition: all .2s ease;background: #e1e1e1;content: "";border-radius: 1em;}
+	}
+	&:checked + .tgl-btn {
+    border: 3px solid #43996E;
+    &:after {left: 50%;background: #43996E;}
+  }
+}
+.pos .payment-screen .paymentlines-container .rounding_label {padding-top: 3px;display: inline-block;font-size: 13px;}
+@media only screen and (max-width: 767.98px){
+	.pos .payment-screen .paymentlines-container .sh_payment_pricelist_div{display: flex;align-items: center;justify-content: center;}
+	.pos .payment-screen .paymentlines-container .tgl + .tgl-btn{float: unset !important;margin-right: 0px !important;}
+	.pos .payment-screen .paymentlines-container .rounding_label{padding-right: 5px;}
+}
+

@@ -1,0 +1,38 @@
+.change_rate_div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .base_currency_span {
+        width: 20%;
+    }
+
+    .change_rate_text {
+        width: 60%;
+
+        .change_rate_textbox {
+            width: 100% !important;
+            box-shadow: none !important;
+            border: 1px solid #E0E2E6;
+            transition: .5s all;
+            padding: 5px;
+            border-radius: 5px;
+
+            &:hover {
+                border-color: $o-brand-primary;
+            }
+        }
+    }
+
+    .pricelist_currency_rate_name {
+        width: 20%;
+    }
+}
+
+.upderate_popup_body {
+    padding: 0 10px 15px;
+
+    .update_rate_lbl {
+        font-weight: 600;
+    }
+}

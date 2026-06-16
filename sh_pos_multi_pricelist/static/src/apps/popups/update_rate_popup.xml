@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="sh_pos__multi_pricelist.UpdateRatePopup">
+        <Dialog title="props.title">
+            <div class="upderate_popup_body">
+                <span class="update_rate_lbl">
+                        Current Rate : 
+                </span>
+                <span class="current_rate_div">
+                        1 <t t-esc="pos.config.currency_id.name"/>
+ =                <t t-esc="(pos.convertCurrency(pos.getOrder().pricelist_id.currency_id, pos.config.currency_id, 1 ))"/>
+                <t t-esc="pos.getOrder().pricelist_id.currency_id.name"/>
+            </span>
+        </div>
+        <div class="change_rate_div">
+            <span class="base_currency_span">
+                        1 <t t-esc="pos.config.currency_id.name"/>
+ =
+            </span>
+            <span class="change_rate_text">
+                <input type="text" t-model="state.cur_rate" class="change_rate_textbox" pattern="[0-9]*" inputmode="decimal"/>
+            </span>
+            <span class="pricelist_currency_rate_name">
+                <t t-esc="pos.getOrder().pricelist_id.currency_id.name"/>
+            </span>
+        </div>
+        <t t-set-slot="footer">
+            <button class="btn btn-primary btn-lg lh-lg o-default-button" t-on-click="confirm">Apply</button>
+            <button class="btn btn-secondary btn-lg lh-lg o-default-button" t-on-click="close">Discard</button>
+        </t>
+    </Dialog>
+</t>
+</templates>

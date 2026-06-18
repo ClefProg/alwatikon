@@ -12,3 +12,13 @@ class ProductProduct(models.Model):
         string='Marketing Display Name',
         ondelete='set null'
     )
+    current_usd_cost = fields.Float(
+        string='Current USD Cost',
+        company_dependent=True,
+        digits='Product Price',
+        groups='alwatikon_pricing.group_pricing_accounting_admin',
+        help=(
+            'Current USD cost used for pricing decisions. '
+            'Does not affect standard_price or inventory valuation.'
+        ),
+    )

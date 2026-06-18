@@ -4,3 +4,4 @@
 from . import res_config_settings
 from . import product_display_name
 from . import product_product
+from . import usd_cost_log

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_usd_cost_log_tree" model="ir.ui.view">
+        <field name="name">usd.cost.log.tree</field>
+        <field name="model">usd.cost.log</field>
+        <field name="arch" type="xml">
+            <list string="USD Cost Log"
+                  create="false"
+                  edit="false"
+                  delete="false">
+                <field name="create_date"/>
+                <field name="product_id"/>
+                <field name="type"/>
+                <field name="old_cost"/>
+                <field name="new_cost"/>
+                <field name="old_qty"/>
+                <field name="new_qty"/>
+                <field name="reference"/>
+                <field name="partner_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_usd_cost_log_search" model="ir.ui.view">
+        <field name="name">usd.cost.log.search</field>
+        <field name="model">usd.cost.log</field>
+        <field name="arch" type="xml">
+            <search string="USD Cost Log">
+                <field name="product_id"/>
+                <field name="reference"/>
+                <field name="partner_id"/>
+                <filter name="filter_purchase" string="Purchase" domain="[('type', '=', 'purchase')]"/>
+                <group>
+                    <filter name="group_product" string="Product" context="{'group_by': 'product_id'}"/>
+                    <filter name="group_partner" string="Vendor" context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'create_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_usd_cost_log" model="ir.actions.act_window">
+        <field name="name">USD Cost Log</field>
+        <field name="res_model">usd.cost.log</field>
+        <field name="view_mode">list</field>
+        <field name="search_view_id" ref="view_usd_cost_log_search"/>
+        <field name="group_ids" eval="[(4, ref('group_pricing_accounting_admin'))]"/>
+    </record>
+
+    <menuitem id="menu_usd_cost_log"
+              name="USD Cost Log"
+              parent="sale.product_menu_catalog"
+              action="action_usd_cost_log"
+              groups="alwatikon_pricing.group_pricing_accounting_admin"
+              sequence="32"/>
+</odoo>

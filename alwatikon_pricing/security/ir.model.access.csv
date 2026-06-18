@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_product_display_name_sales_admin,product.display.name.sales.admin,model_product_display_name,alwatikon_pricing.group_pricing_sales_admin,1,1,1,1
 access_product_display_name_accounting_admin,product.display.name.accounting.admin,model_product_display_name,alwatikon_pricing.group_pricing_accounting_admin,1,0,0,0
 access_product_display_name_user,product.display.name.user,model_product_display_name,base.group_user,1,0,0,0
+access_usd_cost_log_accounting_admin,usd.cost.log.accounting.admin,model_usd_cost_log,alwatikon_pricing.group_pricing_accounting_admin,1,0,0,0

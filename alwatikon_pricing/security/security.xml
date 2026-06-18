@@ -34,4 +34,16 @@
         <field name="model_id" ref="model_usd_cost_log"/>
         <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
+
+    <record id="pricing_record_company_rule" model="ir.rule">
+        <field name="name">Pricing Record: multi-company</field>
+        <field name="model_id" ref="model_pricing_record"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="pricing_record_line_company_rule" model="ir.rule">
+        <field name="name">Pricing Record Line: multi-company</field>
+        <field name="model_id" ref="model_pricing_record_line"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
 </odoo>

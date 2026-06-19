@@ -11,13 +11,13 @@
                 <field name="create_date"/>
                 <field name="product_id"/>
                 <field name="type"/>
-                <field name="old_cost"/>
-                <field name="new_cost"/>
-                <field name="old_qty"/>
-                <field name="new_qty"/>
-                <field name="reference"/>
-                <field name="partner_id"/>
-                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="partner_id" optional="show"/>
+                <field name="reference" optional="show"/>
+                <field name="old_cost" optional="show"/>
+                <field name="new_cost" optional="show"/>
+                <field name="old_qty" optional="show"/>
+                <field name="new_qty" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" optional="show"/>
             </list>
         </field>
     </record>

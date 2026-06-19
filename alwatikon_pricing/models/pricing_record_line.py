@@ -142,3 +142,8 @@ class PricingRecordLine(models.Model):
                 line.cost - line.last_published_cost,
                 precision_digits=price_rounding,
             )
+
+    def _snapshot_published_cost(self):
+        for line in self:
+            line.last_published_cost = line.cost
+

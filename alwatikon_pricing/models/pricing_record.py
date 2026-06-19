@@ -2,7 +2,7 @@
 
 from collections import defaultdict
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_is_zero
 
@@ -93,6 +93,29 @@ class PricingRecord(models.Model):
         'record_id',
         string='Lines',
     )
+
+    @api.model
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
+        icp = self.env['ir.config_parameter'].sudo()
+        param_defaults = {
+            'wholesale_pricing_rate': (
+                'alwatikon_pricing.default_wholesale_pricing_rate', '0',
+            ),
+            'retail_pricing_rate': (
+                'alwatikon_pricing.default_retail_pricing_rate', '0',
+            ),
+            'bank_markup': (
+                'alwatikon_pricing.default_bank_markup', '0',
+            ),
+            'eastern_region_markup': (
+                'alwatikon_pricing.default_eastern_region_markup', '0.06',
+            ),
+        }
+        for field, (param_key, fallback) in param_defaults.items():
+            if field in fields_list and field not in res:
+                res[field] = float(icp.get_param(param_key, fallback))
+        return res
 
     def _channel_selection_labels(self):
         return dict(

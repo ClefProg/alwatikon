@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="config_default_eastern_region_markup" model="ir.config_parameter">
+        <field name="key">alwatikon_pricing.default_eastern_region_markup</field>
+        <field name="value">0.06</field>
+    </record>
+
+    <record id="config_default_bank_markup" model="ir.config_parameter">
+        <field name="key">alwatikon_pricing.default_bank_markup</field>
+        <field name="value">0.06</field>
+    </record>
+
+    <record id="config_default_wholesale_pricing_rate" model="ir.config_parameter">
+        <field name="key">alwatikon_pricing.default_wholesale_pricing_rate</field>
+        <field name="value">0</field>
+    </record>
+
+    <record id="config_default_retail_pricing_rate" model="ir.config_parameter">
+        <field name="key">alwatikon_pricing.default_retail_pricing_rate</field>
+        <field name="value">0</field>
+    </record>
+
+    <record id="config_forecast_landed_pct" model="ir.config_parameter">
+        <field name="key">alwatikon_pricing.forecast_landed_pct</field>
+        <field name="value">0</field>
+    </record>
+</odoo>

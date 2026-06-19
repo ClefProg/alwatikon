@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="base.LYD" model="res.currency">
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="pricelist_wholesale_usd" model="product.pricelist">
+        <field name="name">Wholesale USD</field>
+        <field name="currency_id" ref="base.USD"/>
+        <field name="pricing_channel">wholesale_usd</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="pricelist_wholesale_lyd" model="product.pricelist">
+        <field name="name">Wholesale LYD</field>
+        <field name="currency_id" ref="base.LYD"/>
+        <field name="pricing_channel">wholesale_lyd</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="pricelist_wholesale_bank" model="product.pricelist">
+        <field name="name">Wholesale Bank</field>
+        <field name="currency_id" ref="base.LYD"/>
+        <field name="pricing_channel">wholesale_bank</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="pricelist_retail_usd" model="product.pricelist">
+        <field name="name">Retail USD</field>
+        <field name="currency_id" ref="base.USD"/>
+        <field name="pricing_channel">retail_usd</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="pricelist_retail_lyd" model="product.pricelist">
+        <field name="name">Retail LYD</field>
+        <field name="currency_id" ref="base.LYD"/>
+        <field name="pricing_channel">retail_lyd</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="pricelist_retail_bank" model="product.pricelist">
+        <field name="name">Retail Bank</field>
+        <field name="currency_id" ref="base.LYD"/>
+        <field name="pricing_channel">retail_bank</field>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="pricelist_retail_bnz" model="product.pricelist">
+        <field name="name">Retail BNZ</field>
+        <field name="currency_id" ref="base.LYD"/>
+        <field name="pricing_channel">retail_bnz</field>
+        <field name="sequence">70</field>
+    </record>
+</odoo>

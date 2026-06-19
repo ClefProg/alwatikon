@@ -42,6 +42,32 @@
                         </setting>
                     </block>
 
+                    <block title="Opening USD Costs"
+                           name="alwatikon_pricing_import">
+                        <setting string="Import-Compatible Export Template"
+                                 help="Pre-configured export template on Product Variants. Export with External ID, fill current_usd_cost, re-import to update — once per company."
+                                 id="alwatikon_pricing_usd_cost_import_template_setting">
+                            <div class="mt8 text-muted">
+                                <p class="mb-2">
+                                    Template name: <strong>Opening USD Cost</strong>
+                                    (Inventory → Products → select variants → Action → Export).
+                                </p>
+                                <ol class="mb-0 ps-3">
+                                    <li>Switch to the <strong>target company</strong>.</li>
+                                    <li>Open <strong>Product Variants</strong>, select the variants to load.</li>
+                                    <li><strong>Action → Export</strong>, enable
+                                        <strong>I want to update data (import-compatible export)</strong>.</li>
+                                    <li>Template → <strong>Opening USD Cost</strong>
+                                        (fields: External ID, Internal Reference, Current USD Cost).</li>
+                                    <li>Export, fill <code>current_usd_cost</code> in the spreadsheet.</li>
+                                    <li>Re-import the file on <strong>Product Variant</strong>
+                                        (External ID column updates existing rows — no Name error).</li>
+                                    <li>Repeat for each additional company.</li>
+                                </ol>
+                            </div>
+                        </setting>
+                    </block>
+
                 </app>
             </xpath>
         </field>

@@ -42,6 +42,15 @@
                         </setting>
                     </block>
 
+                    <block title="Pricing Records"
+                           name="alwatikon_pricing_records">
+                        <setting string="Pricing Manager"
+                                 help="Receives a to-do activity when a USD cost change opens or updates a draft pricing record."
+                                 id="alwatikon_pricing_manager_setting">
+                            <field name="pricing_manager_id"/>
+                        </setting>
+                    </block>
+
                     <block title="Opening USD Costs"
                            name="alwatikon_pricing_import">
                         <setting string="Import-Compatible Export Template"

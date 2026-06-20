@@ -28,4 +28,10 @@ class ResConfigSettings(models.TransientModel):
         config_parameter='alwatikon_pricing.forecast_landed_pct',
         default=0.0,
     )
+    pricing_manager_id = fields.Many2one(
+        'res.users',
+        string='Pricing Manager',
+        config_parameter='alwatikon_pricing.pricing_manager_uid',
+        domain="[('share', '=', False)]",
+    )
 

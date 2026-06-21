@@ -8,3 +8,4 @@ from . import product_pricelist
 from . import usd_cost_log
 from . import pricing_record
 from . import pricing_record_line
+from . import stock_move

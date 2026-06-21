@@ -7,8 +7,8 @@ import { ProductScreen } from "@point_of_sale/app/screens/product_screen/product
 
 patch(PosStore.prototype, {
     async setup() {
-        await super.setup(...arguments);
         this.sh_pre_sync_order_state = new Map();
+        await super.setup(...arguments);
     },
     convertCurrency(currency, from_currency, amount) {
         const toRate = parseFloat(currency.rate);

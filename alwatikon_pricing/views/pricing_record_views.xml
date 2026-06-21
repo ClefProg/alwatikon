@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pricing_record_tree" model="ir.ui.view">
+        <field name="name">pricing.record.tree</field>
+        <field name="model">pricing.record</field>
+        <field name="arch" type="xml">
+            <list string="Pricing Records"
+                  decoration-muted="state == 'published'">
+                <field name="name"/>
+                <field name="state"
+                       widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-success="state == 'published'"/>
+                <field name="publish_date" optional="show"/>
+                <field name="version" optional="show"/>
+                <field name="wholesale_pricing_rate" optional="show"/>
+                <field name="retail_pricing_rate" optional="show"/>
+                <field name="bank_markup" optional="hide"/>
+                <field name="eastern_region_markup" optional="hide"/>
+                <field name="shipping" optional="hide"/>
+                <field name="cfr_cost" optional="hide"/>
+                <field name="create_date" optional="hide"/>
+                <field name="company_id" optional="show" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_pricing_record_form" model="ir.ui.view">
+        <field name="name">pricing.record.form</field>
+        <field name="model">pricing.record</field>
+        <field name="arch" type="xml">
+            <form string="Pricing Record">
+                <header>
+                    <button name="action_update"
+                            type="object"
+                            string="Update Prices"
+                            class="btn-secondary"
+                            invisible="state == 'published'"
+                            groups="alwatikon_pricing.group_pricing_sales_admin"/>
+                    <button name="action_publish"
+                            type="object"
+                            string="Publish"
+                            class="btn-primary"
+                            invisible="state == 'published'"
+                            confirm="Publish will overwrite fixed prices on all seven pricelists for in-stock variants. Continue?"
+                            groups="alwatikon_pricing.group_pricing_sales_admin"/>
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,published"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"
+                                   readonly="state == 'published'"
+                                   placeholder="e.g. March 2026 pricing"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Forecast Rates">
+                            <field name="wholesale_pricing_rate"
+                                   readonly="state == 'published'"/>
+                            <field name="retail_pricing_rate"
+                                   readonly="state == 'published'"/>
+                        </group>
+                        <group string="Markups">
+                            <field name="bank_markup"
+                                   readonly="state == 'published'"/>
+                            <field name="eastern_region_markup"
+                                   readonly="state == 'published'"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Landed Inputs (informational)">
+                            <field name="shipping"
+                                   readonly="state == 'published'"/>
+                            <field name="cfr_cost"
+                                   readonly="state == 'published'"/>
+                        </group>
+                        <group string="Audit">
+                            <field name="publish_date"/>
+                            <field name="version"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lines" name="lines">
+                            <field name="line_ids"
+                                   readonly="state == 'published'"
+                                   nolabel="1">
+                                <list string="Pricing Lines"
+                                      editable="bottom"
+                                      decoration-warning="cost_changed_recently">
+                                    <field name="display_name_id" readonly="1"/>
+                                    <field name="cost_changed_recently"
+                                           string="Cost Changed"
+                                           widget="boolean"
+                                           optional="show"/>
+                                    <field name="cost" readonly="1"/>
+                                    <field name="wholesale_usd_price"/>
+                                    <field name="retail_usd_price"/>
+                                    <field name="wholesale_lyd_price" readonly="1" optional="show"/>
+                                    <field name="retail_lyd_price" readonly="1" optional="show"/>
+                                    <field name="wholesale_bank_price" readonly="1" optional="hide"/>
+                                    <field name="retail_bank_price" readonly="1" optional="hide"/>
+                                    <field name="retail_bnz_price" readonly="1" optional="hide"/>
+                                    <field name="last_published_cost" optional="hide"/>
+                                    <field name="company_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pricing_record_search" model="ir.ui.view">
+        <field name="name">pricing.record.search</field>
+        <field name="model">pricing.record</field>
+        <field name="arch" type="xml">
+            <search string="Pricing Records">
+                <field name="name"/>
+                <filter name="filter_draft"
+                        string="Draft"
+                        domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_published"
+                        string="Published"
+                        domain="[('state', '=', 'published')]"/>
+                <group>
+                    <filter name="group_state"
+                            string="Status"
+                            context="{'group_by': 'state'}"/>
+                    <filter name="group_publish_date"
+                            string="Publish Date"
+                            context="{'group_by': 'publish_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_pricing_record" model="ir.actions.act_window">
+        <field name="name">Pricing Records</field>
+        <field name="res_model">pricing.record</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_pricing_record_search"/>
+        <field name="context">{'default_name': 'Draft'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a pricing record to set USD prices, forecast rates, and markups.
+            </p>
+            <p>
+                Use <strong>Update Prices</strong> to refresh USD list prices from pricelists,
+                then <strong>Publish</strong> to push computed prices to all seven channels.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_pricing_record"
+              name="Pricing Records"
+              parent="sale.product_menu_catalog"
+              action="action_pricing_record"
+              sequence="32"/>
+</odoo>

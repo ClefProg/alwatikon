@@ -18,10 +18,14 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
+        'data/pricing_pricelists_data.xml',
+        'data/pricing_defaults_data.xml',
+        'data/pricing_export_data.xml',
         'views/res_config_settings_views.xml',
         'views/product_display_name_views.xml',
         'views/product_product_views.xml',
         'views/product_pricelist_views.xml',
+        'views/pricing_record_views.xml',
         'views/usd_cost_log_views.xml',
     ],
 

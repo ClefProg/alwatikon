@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="export_product_variant_opening_usd_cost" model="ir.exports">
+        <field name="name">Opening USD Cost</field>
+        <field name="resource">product.product</field>
+    </record>
+    
+    <record id="export_product_variant_opening_usd_cost_line_default_code" model="ir.exports.line">
+        <field name="export_id" ref="export_product_variant_opening_usd_cost"/>
+        <field name="name">default_code</field>
+    </record>
+
+    <record id="export_product_variant_opening_usd_cost_line_current_usd_cost" model="ir.exports.line">
+        <field name="export_id" ref="export_product_variant_opening_usd_cost"/>
+        <field name="name">current_usd_cost</field>
+    </record>
+</odoo>

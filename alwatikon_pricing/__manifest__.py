@@ -21,6 +21,7 @@
         'views/res_config_settings_views.xml',
         'views/product_display_name_views.xml',
         'views/product_product_views.xml',
+        'views/product_pricelist_views.xml',
         'views/usd_cost_log_views.xml',
     ],
 

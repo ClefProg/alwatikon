@@ -15,13 +15,13 @@ class ProductProduct(models.Model):
     usd_currency_id = fields.Many2one(
         'res.currency',
         compute='_compute_usd_currency_id',
-        string='USD Currency'
+        string='USD Currency',
     )
-    current_usd_cost = fields.Monetary(
+    current_usd_cost = fields.Float(
         string='Current USD Cost',
         company_dependent=True,
-        currency_field='usd_currency_id',
         groups='alwatikon_pricing.group_pricing_accounting_admin',
+        default=False,
         help=(
             'Current USD cost used for pricing decisions. '
             'Does not affect standard_price or inventory valuation.'

@@ -32,7 +32,8 @@
                         <field name="name"/>
                     </group>
                     <group>
-                        <field name="variant_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        <field name="product_tmpl_id" invisible="1"/>
+                        <field name="variant_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('product_tmpl_id', '=?', product_tmpl_id)]"/>
                     </group>
                 </sheet>
             </form>

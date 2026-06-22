@@ -2,6 +2,7 @@
 
 from odoo import models
 
+
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
@@ -57,7 +58,17 @@ class StockMove(models.Model):
                 new_usd_cost = price_unit_usd
                 
             product.sudo().current_usd_cost = new_usd_cost
-            
+            self.env['usd.cost.log'].sudo().create({
+                'product_id': product.id,
+                'company_id': move.company_id.id,
+                'type': 'purchase',
+                'old_cost': existing_usd_cost,
+                'new_cost': new_usd_cost,
+                'old_qty': existing_qty,
+                'new_qty': total_qty,
+                'reference': pol.order_id.name,
+                'partner_id': pol.order_id.partner_id.id
+            })
             # Update the existing qty for any subsequent moves of the same product in the same transaction
             existing_qtys[product.id] = total_qty
 

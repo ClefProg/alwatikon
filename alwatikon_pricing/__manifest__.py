@@ -18,6 +18,7 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
+        'data/ir_sequence_data.xml',
         'data/pricing_pricelists_data.xml',
         'data/pricing_defaults_data.xml',
         'data/pricing_export_data.xml',

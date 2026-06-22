@@ -32,7 +32,13 @@ class PricingRecord(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'create_date desc, id desc'
 
-    name = fields.Char(required=True, copy=False)
+    name = fields.Char(
+        string='Reference',
+        required=True,
+        copy=False,
+        readonly=True,
+        default=lambda self: _('New'),
+    )
     publish_date = fields.Date(readonly=True, copy=False)
     company_id = fields.Many2one(
         'res.company',
@@ -117,6 +123,13 @@ class PricingRecord(models.Model):
                 res[field] = float(icp.get_param(param_key, fallback))
         return res
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('name', _('New')) == _('New'):
+                vals['name'] = self.env['ir.sequence'].next_by_code('pricing.record') or _('New')
+        return super().create(vals_list)
+
     def _channel_selection_labels(self):
         return dict(
             self.env['product.pricelist']._fields['pricing_channel'].selection
@@ -193,13 +206,11 @@ class PricingRecord(models.Model):
                 if not variants:
                     continue
                 seed_variant = variants[0]
+                wholesale_usd_price = record._get_variant_fixed_price(wholesale_pl, seed_variant)
+                retail_usd_price = record._get_variant_fixed_price(retail_pl, seed_variant)
                 line.write({
-                    'wholesale_usd_price': record._get_variant_fixed_price(
-                        wholesale_pl, seed_variant,
-                    ),
-                    'retail_usd_price': record._get_variant_fixed_price(
-                        retail_pl, seed_variant,
-                    ),
+                    'wholesale_usd_price': wholesale_usd_price,
+                    'retail_usd_price': retail_usd_price,
                 })
         return True
 

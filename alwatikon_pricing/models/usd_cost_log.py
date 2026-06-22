@@ -101,7 +101,6 @@ class UsdCostLog(models.Model):
             )
             if not draft:
                 draft = PricingRecord.create({
-                    'name': _('Draft'),
                     'company_id': company.id,
                 })
 

@@ -25,7 +25,6 @@ class PricingRecordLine(models.Model):
         'product.display.name',
         string='Display Name',
         required=True,
-        readonly=True,
     )
     cost = fields.Float(
         string='Cost (USD)',
@@ -111,6 +110,8 @@ class PricingRecordLine(models.Model):
                     )
                     cost = weighted / total_qty
             line.cost = cost
+            line.wholesale_usd_price = cost
+            line.retail_usd_price = cost
 
     @api.depends(
         'wholesale_usd_price',

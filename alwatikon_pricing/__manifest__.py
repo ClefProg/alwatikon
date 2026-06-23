@@ -30,6 +30,12 @@
         'views/usd_cost_log_views.xml',
     ],
 
+    'assets': {
+        'point_of_sale._assets_pos': [
+            'alwatikon_pricing/static/src/js/pos_store.js',
+        ],
+    },
+
     'installable': True,
     'application': False,
 

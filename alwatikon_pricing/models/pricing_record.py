@@ -274,3 +274,17 @@ class PricingRecord(models.Model):
         self.message_post(
             body=_('Pricing record published (version %s).', new_version),
         )
+
+        updated_pricelist_ids = [pl.id for pl in channel_map.values()]
+        open_sessions = self.env['pos.session'].search([('state', '=', 'opened')])
+        target_sessions = []
+        for session in open_sessions:
+            session_pricelists = session.config_id.available_pricelist_ids
+            if not session_pricelists and session.config_id.pricelist_id:
+                session_pricelists = session.config_id.pricelist_id
+            if set(updated_pricelist_ids) & set(session_pricelists.ids):
+                target_sessions.append(session)
+
+        if target_sessions:
+            for session in target_sessions:
+                session.config_id._notify('POS_PRICELIST_UPDATE', {})

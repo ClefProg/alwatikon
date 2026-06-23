@@ -42,7 +42,7 @@
                             string="Publish"
                             class="btn-primary"
                             invisible="state == 'published'"
-                            confirm="Publish will overwrite fixed prices on all seven pricelists for in-stock variants. Continue?"
+                            confirm="Publish will overwrite fixed prices on all seven pricelists for all variants in the pricing record. Continue?"
                             groups="alwatikon_pricing.group_pricing_sales_admin"/>
                     <field name="state"
                            widget="statusbar"

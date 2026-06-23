@@ -6,8 +6,10 @@
         <field name="arch" type="xml">
             <list string="Display Names">
                 <field name="name"/>
-                <field name="variant_count"/>
+                <field name="usd_currency_id" column_invisible="1"/>
+                <field name="average_cost" widget="monetary" options="{'currency_field': 'usd_currency_id'}" optional="show"/>
                 <field name="unassigned_variant_count" optional="hide"/>
+                <field name="variant_count" optional="hide"/>
             </list>
         </field>
     </record>
@@ -34,6 +36,8 @@
                     <group>
                         <field name="product_tmpl_id" invisible="1"/>
                         <field name="variant_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('product_tmpl_id', '=?', product_tmpl_id)]"/>
+                        <field name="usd_currency_id" invisible="1"/>
+                        <field name="average_cost" widget="monetary" options="{'currency_field': 'usd_currency_id'}"/>
                     </group>
                 </sheet>
             </form>

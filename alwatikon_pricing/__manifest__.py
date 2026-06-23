@@ -12,7 +12,7 @@
     'version': '19.0.1.0.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['alwatikon_base', 'product', 'stock_account', 'accountant', 'sale_management', 'mail', 'purchase'],
+    'depends': ['alwatikon_base', 'product', 'stock_account', 'accountant', 'sale_management', 'mail', 'purchase', 'point_of_sale'],
 
     # always loaded
     'data': [

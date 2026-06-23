@@ -96,19 +96,12 @@ class PricingRecordLine(models.Model):
         ),
     ]
 
-    @api.depends('display_name_id', 'display_name_id.variant_ids', 'company_id')
+    @api.depends('display_name_id.average_cost', 'company_id')
     def _compute_cost(self):
         for line in self:
             cost = 0.0
             if line.display_name_id:
-                variants = line.display_name_id.variant_ids.with_company(line.company_id)
-                total_qty = sum(variants.mapped('qty_available'))
-                if total_qty:
-                    weighted = sum(
-                        variant.current_usd_cost * variant.qty_available
-                        for variant in variants
-                    )
-                    cost = weighted / total_qty
+                cost = line.display_name_id.with_company(line.company_id).average_cost
             line.cost = cost
             line.wholesale_usd_price = cost
             line.retail_usd_price = cost

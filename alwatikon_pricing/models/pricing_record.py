@@ -181,7 +181,7 @@ class PricingRecord(models.Model):
         ], order='min_quantity desc, id desc')
         return items[:1].fixed_price if items else 0.0
 
-    def _get_instock_variant_line_map(self):
+    def _get_variant_line_map(self):
         self.ensure_one()
         lines_by_variant = {}
         for line in self.line_ids:
@@ -189,8 +189,7 @@ class PricingRecord(models.Model):
                 continue
             variants = line.display_name_id.variant_ids.with_company(self.company_id)
             for variant in variants:
-                if variant.qty_available >= 1:
-                    lines_by_variant[variant.id] = line
+                lines_by_variant[variant.id] = line
         return lines_by_variant
 
     def action_update(self):
@@ -225,7 +224,7 @@ class PricingRecord(models.Model):
             raise UserError(_('Cannot publish a pricing record without lines.'))
 
         channel_map = self._resolve_channel_pricelists()
-        lines_by_variant = self._get_instock_variant_line_map()
+        lines_by_variant = self._get_variant_line_map()
         price_rounding = self.env['decimal.precision'].precision_get('Product Price')
         PricelistItem = self.env['product.pricelist.item']
 

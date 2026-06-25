@@ -28,6 +28,7 @@
         'views/product_pricelist_views.xml',
         'views/pricing_record_views.xml',
         'views/usd_cost_log_views.xml',
+        'views/res_currency_rate_views.xml',
     ],
 
     'assets': {

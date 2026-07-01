@@ -193,24 +193,21 @@ class PricingRecord(models.Model):
         return lines_by_variant
 
     def action_update(self):
-        """Re-read wholesale/retail USD list prices onto every line from pricelists."""
+        """Re-read all list prices onto every line from pricelists."""
         for record in self:
-            channel_map = record._resolve_channel_pricelists(
-                channels=('wholesale_usd', 'retail_usd'),
-            )
-            wholesale_pl = channel_map['wholesale_usd']
-            retail_pl = channel_map['retail_usd']
+            channel_map = record._resolve_channel_pricelists()
             for line in record.line_ids:
                 variants = line.display_name_id.variant_ids
                 if not variants:
                     continue
                 seed_variant = variants[0]
-                wholesale_usd_price = record._get_variant_fixed_price(wholesale_pl, seed_variant)
-                retail_usd_price = record._get_variant_fixed_price(retail_pl, seed_variant)
-                line.write({
-                    'wholesale_usd_price': wholesale_usd_price,
-                    'retail_usd_price': retail_usd_price,
-                })
+                vals = {}
+                for channel, pricelist in channel_map.items():
+                    price = record._get_variant_fixed_price(pricelist, seed_variant)
+                    if price:
+                        vals[CHANNEL_PRICE_FIELD[channel]] = price
+                if vals:
+                    line.write(vals)
         return True
 
     def action_publish(self):

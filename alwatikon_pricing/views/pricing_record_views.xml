@@ -100,11 +100,11 @@
                                     <field name="cost" readonly="1"/>
                                     <field name="wholesale_usd_price"/>
                                     <field name="retail_usd_price"/>
-                                    <field name="wholesale_lyd_price" readonly="1" optional="show"/>
-                                    <field name="retail_lyd_price" readonly="1" optional="show"/>
-                                    <field name="wholesale_bank_price" readonly="1" optional="hide"/>
-                                    <field name="retail_bank_price" readonly="1" optional="hide"/>
-                                    <field name="retail_bnz_price" readonly="1" optional="hide"/>
+                                    <field name="wholesale_lyd_price" optional="show"/>
+                                    <field name="retail_lyd_price" optional="show"/>
+                                    <field name="wholesale_bank_price" optional="hide"/>
+                                    <field name="retail_bank_price" optional="hide"/>
+                                    <field name="retail_bnz_price" optional="hide"/>
                                     <field name="last_published_cost" optional="hide"/>
                                     <field name="company_id" column_invisible="1"/>
                                 </list>
